@@ -83,7 +83,7 @@ http://127.0.0.1:8080/graphql
 
 具体操作也不复杂，请自行摸索或网上找资料。
 
-## 有待开发功能(TODO List)
+## 待开发功能(TODO List)
 
 - [ ] [Plan 2021 Q1]支持基于Angular的后台管理(Admin)界面
 - [ ] [Plan 2021 Q1]支持基于Angular的演示用的购物Shopping Web App
