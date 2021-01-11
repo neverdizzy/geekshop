@@ -86,7 +86,7 @@ http://127.0.0.1:8080/graphql
 ## 有待开发功能(TODO List)
 
 - [ ] [Plan 2021 Q1]支持基于Angular的后台管理(Admin)界面
-- [ ] [Plan 2021 Q1]支持基于Angular的演示用的购物Shopping App
+- [ ] [Plan 2021 Q1]支持基于Angular的演示用的购物Shopping Web App
 - [ ] [Plan 2021 Q1]支持MySQL数据库。目前暂支持嵌入式H2数据库
 - [ ] [Plan 2021 Q1]支持本地图片存储和图片缩放/剪切
 - [ ] [Plan 2021 Q1]支持事件可DB持久化的异步任务机制，集成[killbill common queue](https://github.com/killbill/killbill-commons/tree/master/queue)。目前仅支持事件不可持久化的Guava EventBus
@@ -96,7 +96,7 @@ http://127.0.0.1:8080/graphql
 - [ ] [Plan 2021 Q2]极客时间课程《Spring + GraphQL电商中台实战》
 - [ ] [Plan 2021 Q3/Q4] 微服务版本+K8s部署+课程
 - [ ] 汉化，目前仅支持英文，需企业自行定制，欢迎pull request。
-- [ ] 支持ElasticSearch产品搜索，需企业定制，欢迎pull request。目前仅支持基于DB的简单文本搜索(Like方式)。
+- [ ] 支持ElasticSearch产品搜索，需企业自行定制，欢迎pull request。目前仅支持基于DB的简单文本搜索(Like方式)。
 - [ ] 支持图片的云存储和处理，需企业自行定制，欢迎pull request。目前暂支持本地存储和简单图片处理。
 - [ ] 集成微信/支付宝等支付方式，需企业自行定制，欢迎pull request。目前仅支持Mock支付方式。
 - [ ] 集成快递供应商，需企业自行定制，欢迎pull request。目前仅支持Mock快递方式。
