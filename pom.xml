@@ -84,12 +84,6 @@
       <version>3.1.4</version>
     </dependency>
 
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>0.9.1</version>
-    </dependency>
-
     <!-- https://mvnrepository.com/artifact/com.aventrix.jnanoid/jnanoid -->
     <dependency>
       <groupId>com.aventrix.jnanoid</groupId>
