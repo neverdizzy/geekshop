@@ -1,11 +1,10 @@
 # 极客商城～GeekShop
-一个面向开发者的、基于Spring+GraphQL+Angular的、无前端(headless)电商框架。框架亮点：
+一个面向开发者的、基于Spring+GraphQL+Angular的、无前端的(headless)电商框架。
 
-* **无前端(headless)框架**，后端提供基于标准GraphQL的API接口，支持前后分离开发模型，前端框架无关，用户可以根据需要灵活选择各种前端技术，如Angular，Reactjs或者Vuejs等。
-* **面向开发者的框架**，支持基于契约的类型安全的[GralphQL API接口](https://github.com/geekxyz/geekshop/tree/main/src/main/resources/graphql)，提升开发者生产率。
-* **开源**，基于[MIT license](https://tldrlegal.com/license/mit-license)，所有源代码开放在github上。
+* **无前端(Headless)**指的是GeekShop框架专注于后端实现，它不关心具体前端界面的实现方式。GeekShop主要是面向开发者的。GeekShop暴露了一组基于GraphQL的电商APIs，通过这些APIs，开发者可以查询(query)数据，例如查询商品数据，或者修改(mutate)数据，例如将商品'123'添加都当前订单中。所以，基于GeekShop开发电商应用的话，开发者需要自己根据业务需要去实现前端的“店面”，例如可以使用诸如Angular/React/Vue等不同的前端展示技术来实现。GeekShop已经实现好了后端，它相当于一个**电商中台**。
+* Geekshop已经实现了电商的核心功能，但是GeekShop也是可以扩展的，它的代码是开源的(MIT License)，开发者可以根据需要进一步定制扩展GeekShop的功能。
 
-**注意，该框架主要为教学而开发，目前是Alpha状态，如需生产化，需自己严格测试+定制**。
+**注意，该框架主要为教学而开发，目前是Alpha状态，如需生产化，需自行严格测试+定制**。
 
 ## 电商框架功能亮点
 
