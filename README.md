@@ -179,4 +179,4 @@ Resoures源码
 
 ## Copyright
 
-#### Copyright © 2020-present GeekXYZ. All rights reserved.
+#### Copyright © 2020-present GeekShop. All rights reserved.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 GeekXYZ.
+ * Copyright (c) 2021 GeekShop.
  * All rights reserved.
  */
 
