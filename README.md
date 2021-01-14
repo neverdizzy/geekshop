@@ -29,7 +29,7 @@
 3. GraphQL框架：[graphql-java-kickstart](https://github.com/graphql-java-kickstart/graphql-spring-boot)
 4. 持久层框架：[Mybatis-Plus](https://mybatis.plus/)
 5. 异步任务框架：Guava EventBus
-6. 安全框架：自研，基于JWT + AOP
+6. 安全框架：自研，基于集中式令牌(token) + AOP
 7. 数据库存储：支持H2(测试)和MySQL(生产)
 
 ## 如何运行
@@ -88,7 +88,7 @@ http://127.0.0.1:8080/graphql
 - [ ] [Plan 2021 Q1]支持基于Angular的后台管理(Admin)界面
 - [ ] [Plan 2021 Q1]支持基于Angular的演示用的购物Shopping Web App
 - [ ] [Plan 2021 Q1]支持MySQL数据库。目前暂支持嵌入式H2数据库
-- [ ] [Plan 2021 Q1]支持本地图片存储和图片缩放/剪切
+- [ ] [Plan 2021 Q1]支持本地图片访问和图片缩放/剪切
 - [ ] [Plan 2021 Q1]支持事件可DB持久化的异步任务机制，集成[killbill common queue](https://github.com/killbill/killbill-commons/tree/master/queue)。目前仅支持事件不可持久化的Guava EventBus
 - [ ] [Plan 2021 Q1]Docker自动部署脚本
 - [ ] [Plan 2021 Q1]开发者文档
