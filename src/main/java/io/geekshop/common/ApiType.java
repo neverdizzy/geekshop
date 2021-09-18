@@ -11,7 +11,16 @@ package io.geekshop.common;
  * Created on Nov, 2020 by @author bobo
  */
 public enum ApiType {
+    /**
+     * 管理后台
+     */
     ADMIN,
+    /**
+     * 购物网站端
+     */
     SHOP,
+    /**
+     * 消费者客户
+     */
     CUSTOM
 }

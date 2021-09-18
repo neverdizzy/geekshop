@@ -29,7 +29,7 @@ public enum OrderState {
      */
     PaymentSettled,
     /**
-     * 部分完成
+     * 部分配货
      */
     PartiallyFulfilled,
     /**
@@ -37,7 +37,7 @@ public enum OrderState {
      */
     Fulfilled,
     /**
-     * 取消订单
+     * 已取消
      */
     Cancelled
 }

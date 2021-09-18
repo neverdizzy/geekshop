@@ -27,6 +27,7 @@ public abstract class ShippingEligibilityChecker extends ConfigurableOperationDe
     }
 
     /**
+     * 检查给定的订单并确保它是否符合条件
      * Check the given Order to determine whether it is eligible.
      */
     public abstract boolean check(OrderEntity orderEntity, ConfigArgValues argValues);

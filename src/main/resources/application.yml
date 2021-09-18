@@ -37,7 +37,8 @@ logging:
 geekshop:
   company-name: ${COMPANY_NAME:GEEKSHOP}
   auth-options:
-    disable-auth: ${DISABLE_AUTH:false}
+    disable-auth: ${DISABLE_AUTH:true}
+#    disable-auth: ${DISABLE_AUTH:false}
     token-method: ${TOKEN_MEHTOD:cookie}
     cookie-options:
       http-only: ${COOKIE_HTTP_ONLY:true}
@@ -68,3 +69,9 @@ geekshop:
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#databaseName: shop
+#username: root
+#password: Dusto_2018
+#jdbcConnectionString: jdbc:mysql://10.0.4.57:3306/
+#useMariaDB: false

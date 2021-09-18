@@ -18,6 +18,7 @@ import java.util.Map;
 @Data
 public class ShippingCalculationResult {
     /**
+     * 运送方式价格
      * The shipping_method price
      */
     private Integer price;

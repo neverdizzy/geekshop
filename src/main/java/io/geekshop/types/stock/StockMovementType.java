@@ -10,7 +10,16 @@ package io.geekshop.types.stock;
  */
 public enum StockMovementType {
     ADJUSTMENT,
+    /**
+     * 销售
+     */
     SALE,
+    /**
+     * 退货
+     */
     CANCELLATION,
+    /**
+     * 还库
+     */
     RETURN
 }

@@ -27,6 +27,7 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 
 /**
+ * 用户注册发送邮件确认事件
  * Created on Nov, 2020 by @author bobo
  */
 @Component
@@ -45,6 +46,7 @@ public class AccountRegistrationEventSubscriber {
 
     @PostConstruct
     void init() {
+        System.out.println("AccountRegistrationEventSubscriber register");
         eventBus.register(this);
     }
 

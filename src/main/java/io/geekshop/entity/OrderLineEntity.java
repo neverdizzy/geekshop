@@ -37,6 +37,10 @@ public class OrderLineEntity extends BaseEntity {
         return CollectionUtils.isEmpty(this.getActiveItems()) ? 0 : this.getActiveItems().get(0).getUnitPrice();
     }
 
+    /**
+     * 获取订单行中商品总数
+     * @return
+     */
     public Integer getQuantity() {
         return this.getActiveItems().size();
     }

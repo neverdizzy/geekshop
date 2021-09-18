@@ -4,7 +4,8 @@ database: mysql
 
 spring:
   datasource:
-    url: ${MYSQL_URL:jdbc:mysql://localhost/geekshop}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_URL:jdbc:mysql://10.0.4.57:3306/shop}
     username: ${MYSQL_USER:geekshop}
     password: ${MYSQL_PASS:geekshop}
     # SQL is written to be idempotent so this is safe

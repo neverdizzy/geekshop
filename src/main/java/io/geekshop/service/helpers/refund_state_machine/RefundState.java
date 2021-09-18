@@ -11,7 +11,16 @@ package io.geekshop.service.helpers.refund_state_machine;
  * Created on Dec, 2020 by @author bobo
  */
 public enum RefundState {
+    /**
+     * 退款中
+     */
     Pending,
+    /**
+     * 完成
+     */
     Settled,
+    /**
+     * 失败
+     */
     Failed
 }

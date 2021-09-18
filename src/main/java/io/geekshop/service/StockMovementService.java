@@ -95,6 +95,7 @@ public class StockMovementService {
         for(OrderLineEntity lineEntity : orderEntity.getLines()) {
             StockMovementEntity saleEntity = new StockMovementEntity();
             saleEntity.setType(StockMovementType.SALE);
+            // 商品总数量
             saleEntity.setQuantity(lineEntity.getQuantity() * -1);
             saleEntity.setProductVariantId(lineEntity.getProductVariantId());
             saleEntity.setOrderLineId(lineEntity.getId());

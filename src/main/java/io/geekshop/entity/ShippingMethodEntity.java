@@ -27,6 +27,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.toMap;
 
 /**
+ * 运送方式
  * A ShippingMethod is used to apply to a shipping_method price to an {@link OrderEntity}. It is composed of a
  * {@link ShippingEligibilityChecker} and a {@link ShippingCalculator}. For a given Order,
  * the `checker` is used to determine whether this ShippingMethod can be used. If yes, then

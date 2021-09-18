@@ -5,18 +5,14 @@
 
 package io.geekshop.service.helpers.order_state_machine;
 
+import com.google.common.collect.ImmutableMap;
 import io.geekshop.common.RequestContext;
 import io.geekshop.common.fsm.FSM;
 import io.geekshop.common.fsm.StateMachineConfig;
 import io.geekshop.common.fsm.Transitions;
-import io.geekshop.entity.FulfillmentEntity;
 import io.geekshop.entity.OrderEntity;
-import io.geekshop.entity.OrderItemEntity;
-import io.geekshop.entity.OrderLineEntity;
 import io.geekshop.exception.IllegalOperationException;
 import io.geekshop.mapper.OrderEntityMapper;
-import io.geekshop.mapper.OrderItemEntityMapper;
-import io.geekshop.mapper.OrderLineEntityMapper;
 import io.geekshop.service.HistoryService;
 import io.geekshop.service.PromotionService;
 import io.geekshop.service.StockMovementService;
@@ -25,8 +21,6 @@ import io.geekshop.service.helpers.OrderHelper;
 import io.geekshop.service.helpers.ServiceHelper;
 import io.geekshop.service.helpers.payment_state_machine.PaymentState;
 import io.geekshop.types.history.HistoryEntryType;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.google.common.collect.ImmutableMap;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;

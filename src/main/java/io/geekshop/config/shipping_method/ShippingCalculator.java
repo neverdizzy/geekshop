@@ -28,6 +28,7 @@ public abstract class ShippingCalculator extends ConfigurableOperationDef {
     }
 
     /**
+     * 计算给定订单的shipping_method的价格。
      * Calculates the price of shipping_method for the given Order.
      */
     public abstract  ShippingCalculationResult calculate(OrderEntity orderEntity, ConfigArgValues argValues);

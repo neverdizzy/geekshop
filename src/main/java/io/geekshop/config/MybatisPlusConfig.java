@@ -33,6 +33,7 @@ public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
         DbType dbType = Constant.DB_NAME_H2.equalsIgnoreCase(dbName) ? DbType.H2 : DbType.MYSQL;
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(dbType));
         return interceptor;
