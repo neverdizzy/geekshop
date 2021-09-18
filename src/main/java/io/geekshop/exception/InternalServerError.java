@@ -5,7 +5,6 @@
 
 package io.geekshop.exception;
 
-import graphql.ErrorClassification;
 import graphql.ErrorType;
 
 /**
@@ -27,7 +26,7 @@ public class InternalServerError extends AbstractGraphqlException {
     }
 
     @Override
-    public ErrorClassification getErrorType() {
+    public ErrorType getErrorType() {
         return ErrorType.ExecutionAborted;
     }
 }

@@ -46,7 +46,7 @@ public class CustomerResolver implements GraphQLResolver<Customer> {
 
     public CompletableFuture<User> getUser(Customer customer, DataFetchingEnvironment dfe) {
         final DataLoader<Long, User> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_CUSTOMER_USER);
 
         return dataLoader.load(customer.getId());
@@ -62,7 +62,7 @@ public class CustomerResolver implements GraphQLResolver<Customer> {
         }
 
         final DataLoader<Long, List<Address>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_CUSTOMER_ADDRESSES);
 
         return dataLoader.load(customer.getId());
@@ -78,7 +78,7 @@ public class CustomerResolver implements GraphQLResolver<Customer> {
         }
 
         final DataLoader<Long, List<CustomerGroup>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_CUSTOMER_GROUPS);
 
         return dataLoader.load(customer.getId());

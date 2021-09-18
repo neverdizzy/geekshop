@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 public class FacetResolver implements GraphQLResolver<Facet> {
     public CompletableFuture<List<FacetValue>> getValues(Facet facet, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<FacetValue>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_FACET_VALUES);
 
         return dataLoader.load(facet.getId());

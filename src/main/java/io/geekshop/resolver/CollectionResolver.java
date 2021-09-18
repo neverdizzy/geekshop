@@ -45,7 +45,7 @@ public class CollectionResolver implements GraphQLResolver<Collection> {
         }
 
         final DataLoader<Long, Asset> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_COLLECTION_FEATURED_ASSET);
 
         return dataLoader.load(collection.getFeaturedAssetId());
@@ -53,7 +53,7 @@ public class CollectionResolver implements GraphQLResolver<Collection> {
 
     public CompletableFuture<List<Asset>> getAssets(Collection collection, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Asset>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_COLLECTION_ASSETS);
 
         return dataLoader.load(collection.getId());
@@ -67,7 +67,7 @@ public class CollectionResolver implements GraphQLResolver<Collection> {
         }
 
         final DataLoader<Long, Collection> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_COLLECTION_PARENT);
 
         return dataLoader.load(collection.getParentId());
@@ -76,7 +76,7 @@ public class CollectionResolver implements GraphQLResolver<Collection> {
     public CompletableFuture<List<Collection>> getChildren(
             Collection collection, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Collection>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_COLLECTION_CHILDREN);
 
         return dataLoader.load(collection.getId());

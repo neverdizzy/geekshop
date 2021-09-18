@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 public class FulfillmentResolver implements GraphQLResolver<Fulfillment> {
     public CompletableFuture<List<OrderItem>> getOrderItems(Fulfillment fulfillment, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<OrderItem>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_FULFILLMENT_ORDER_ITEMS);
 
         return dataLoader.load(fulfillment.getId());

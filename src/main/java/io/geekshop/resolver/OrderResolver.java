@@ -54,7 +54,7 @@ public class OrderResolver implements GraphQLResolver<Order> {
         }
 
         final DataLoader<Long, Customer> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_CUSTOMER);
 
         return dataLoader.load(order.getCustomerId());
@@ -62,7 +62,7 @@ public class OrderResolver implements GraphQLResolver<Order> {
 
     public CompletableFuture<List<Promotion>> getPromotions(Order order, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Promotion>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_PROMOTIONS);
 
         return dataLoader.load(order.getId());
@@ -70,7 +70,7 @@ public class OrderResolver implements GraphQLResolver<Order> {
 
     public CompletableFuture<List<Payment>> getPayments(Order order, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Payment>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_PAYMENTS);
 
         return dataLoader.load(order.getId());
@@ -92,7 +92,7 @@ public class OrderResolver implements GraphQLResolver<Order> {
         }
 
         final DataLoader<Long, ShippingMethod> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_SHIPPING_METHOD);
 
         return dataLoader.load(order.getShippingMethodId());
@@ -125,7 +125,7 @@ public class OrderResolver implements GraphQLResolver<Order> {
 
     public CompletableFuture<List<OrderLine>> getLines(Order order, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<OrderLine>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_LINES);
 
         return dataLoader.load(order.getId());

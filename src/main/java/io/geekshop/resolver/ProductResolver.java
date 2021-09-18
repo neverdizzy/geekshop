@@ -45,7 +45,7 @@ public class ProductResolver implements GraphQLResolver<Product> {
         }
 
         final DataLoader<Long, Asset> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_FEATURED_ASSET);
 
         return dataLoader.load(product.getFeaturedAssetId());
@@ -53,7 +53,7 @@ public class ProductResolver implements GraphQLResolver<Product> {
 
     public CompletableFuture<List<Asset>> getAssets(Product product, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Asset>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_ASSETS);
 
         return dataLoader.load(product.getId());
@@ -61,7 +61,7 @@ public class ProductResolver implements GraphQLResolver<Product> {
 
     public CompletableFuture<List<ProductVariant>> getVariants(Product product, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<ProductVariant>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANTS);
 
         RequestContext ctx = RequestContext.fromDataFetchingEnvironment(dfe);
@@ -71,7 +71,7 @@ public class ProductResolver implements GraphQLResolver<Product> {
 
     public CompletableFuture<List<ProductOptionGroup>> getOptionGroups(Product product, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<ProductOptionGroup>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_OPTION_GROUPS);
 
         return dataLoader.load(product.getId());
@@ -79,7 +79,7 @@ public class ProductResolver implements GraphQLResolver<Product> {
 
     public CompletableFuture<List<FacetValue>> getFacetValues(Product product, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<FacetValue>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_FACET_VALUES);
 
         RequestContext ctx = RequestContext.fromDataFetchingEnvironment(dfe);

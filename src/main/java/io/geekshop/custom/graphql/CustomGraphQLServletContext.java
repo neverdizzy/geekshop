@@ -34,7 +34,7 @@ public class CustomGraphQLServletContext extends DefaultGraphQLContext implement
     }
 
     public CustomGraphQLServletContext(DefaultGraphQLServletContext defaultGraphQLServletContext) {
-        super(defaultGraphQLServletContext.getDataLoaderRegistry().orElse(null),
+        super(defaultGraphQLServletContext.getDataLoaderRegistry(),
                 defaultGraphQLServletContext.getSubject().orElse(null));
         this.defaultGraphQLServletContext = defaultGraphQLServletContext;
     }

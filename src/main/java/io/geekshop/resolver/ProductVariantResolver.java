@@ -43,7 +43,7 @@ public class ProductVariantResolver implements GraphQLResolver<ProductVariant> {
         }
 
         final DataLoader<Long, Product> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANT_PRODUCT);
 
         return dataLoader.load(productVariant.getProductId());
@@ -57,7 +57,7 @@ public class ProductVariantResolver implements GraphQLResolver<ProductVariant> {
         }
 
         final DataLoader<Long, Asset> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANT_FEATURED_ASSET);
 
         return dataLoader.load(productVariant.getFeaturedAssetId());
@@ -65,7 +65,7 @@ public class ProductVariantResolver implements GraphQLResolver<ProductVariant> {
 
     public CompletableFuture<List<Asset>> getAssets(ProductVariant productVariant, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Asset>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANT_ASSETS);
 
         return dataLoader.load(productVariant.getId());
@@ -74,7 +74,7 @@ public class ProductVariantResolver implements GraphQLResolver<ProductVariant> {
     public CompletableFuture<List<ProductOption>> getOptions(ProductVariant productVariant,
                                                              DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<ProductOption>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANT_OPTIONS);
 
         return dataLoader.load(productVariant.getId());
@@ -82,7 +82,7 @@ public class ProductVariantResolver implements GraphQLResolver<ProductVariant> {
 
     public CompletableFuture<List<FacetValue>> getFacetValues(ProductVariant productVariant, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<FacetValue>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_VARIANT_FACET_VALUES);
 
         RequestContext ctx = RequestContext.fromDataFetchingEnvironment(dfe);

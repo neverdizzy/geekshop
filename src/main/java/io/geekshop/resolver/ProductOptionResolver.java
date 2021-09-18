@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 public class ProductOptionResolver implements GraphQLResolver<ProductOption> {
     public CompletableFuture<ProductOptionGroup> getGroup(ProductOption productOption, DataFetchingEnvironment dfe) {
         final DataLoader<Long, ProductOptionGroup> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PRODUCT_OPTION_GROUP);
 
         return dataLoader.load(productOption.getGroupId());

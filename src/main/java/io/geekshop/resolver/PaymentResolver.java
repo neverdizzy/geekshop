@@ -26,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 public class PaymentResolver implements GraphQLResolver<Payment> {
     public CompletableFuture<List<Refund>> getRefunds(Payment payment, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Refund>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_PAYMENT_REFUNDS);
 
         return dataLoader.load(payment.getId());

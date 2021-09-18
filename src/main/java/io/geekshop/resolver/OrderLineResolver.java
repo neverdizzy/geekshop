@@ -27,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
 public class OrderLineResolver implements GraphQLResolver<OrderLine> {
     public CompletableFuture<ProductVariant> getProductVariant(OrderLine orderLine, DataFetchingEnvironment dfe) {
         final DataLoader<Long, ProductVariant> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_LINE_PRODUCT_VARIANT);
 
         return dataLoader.load(orderLine.getProductVariantId());
@@ -41,7 +41,7 @@ public class OrderLineResolver implements GraphQLResolver<OrderLine> {
         }
 
         final DataLoader<Long, Asset> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_LINE_FEATURED_ASSET);
 
         return dataLoader.load(orderLine.getFeaturedAssetId());
@@ -49,7 +49,7 @@ public class OrderLineResolver implements GraphQLResolver<OrderLine> {
 
     public CompletableFuture<List<OrderItem>> getItems(OrderLine orderLine, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<OrderItem>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_LINE_ITEMS);
 
         return dataLoader.load(orderLine.getId());
@@ -57,7 +57,7 @@ public class OrderLineResolver implements GraphQLResolver<OrderLine> {
 
     public CompletableFuture<Order> getOrder(OrderLine orderLine, DataFetchingEnvironment dfe) {
         final DataLoader<Long, Order> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_LINE_ORDER);
 
         return dataLoader.load(orderLine.getOrderId());

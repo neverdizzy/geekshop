@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 public class AdministratorResolver implements GraphQLResolver<Administrator> {
     public CompletableFuture<User> getUser(Administrator administrator, DataFetchingEnvironment dfe) {
         final DataLoader<Long, User> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ADMINISTRATOR_USER);
 
         return dataLoader.load(administrator.getId());

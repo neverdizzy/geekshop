@@ -5,7 +5,6 @@
 
 package io.geekshop.exception;
 
-import graphql.ErrorClassification;
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.language.SourceLocation;
@@ -40,7 +39,7 @@ public class AbstractGraphqlException extends RuntimeException implements GraphQ
     }
 
     @Override
-    public ErrorClassification getErrorType() {
+    public ErrorType getErrorType() {
         return ErrorType.ValidationError;
     }
 }

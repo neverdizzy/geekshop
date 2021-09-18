@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 public class UserResolver implements GraphQLResolver<User> {
     public CompletableFuture<List<Role>> getRoles(User user, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<Role>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_USER_ROLES);
 
         return dataLoader.load(user.getId());
@@ -34,7 +34,7 @@ public class UserResolver implements GraphQLResolver<User> {
     public CompletableFuture<List<AuthenticationMethod>> getAuthenticationMethods(
             User user, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<AuthenticationMethod>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_USER_AUTHENTICATION_METHODS);
 
         return dataLoader.load(user.getId());

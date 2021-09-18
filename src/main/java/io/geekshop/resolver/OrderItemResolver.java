@@ -29,7 +29,7 @@ public class OrderItemResolver implements GraphQLResolver<OrderItem> {
         }
 
         final DataLoader<Long, Fulfillment> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_ORDER_ITEM_FULFILLMENT);
 
         return dataLoader.load(orderItem.getFulfillmentId());

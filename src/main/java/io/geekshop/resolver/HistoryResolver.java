@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 public class HistoryResolver implements GraphQLResolver<Administrator> {
     public CompletableFuture<Administrator> getAdministrator(HistoryEntry historyEntry, DataFetchingEnvironment dfe) {
         final DataLoader<Long, Administrator> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_HISTORY_ENTRY_ADMINISTRATOR);
 
         return dataLoader.load(historyEntry.getAdministratorId());

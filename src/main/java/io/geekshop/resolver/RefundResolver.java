@@ -26,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 public class RefundResolver implements GraphQLResolver<Refund> {
     public CompletableFuture<List<OrderItem>> getOrderItems(Refund refund, DataFetchingEnvironment dfe) {
         final DataLoader<Long, List<OrderItem>> dataLoader = ((GraphQLContext) dfe.getContext())
-                .getDataLoaderRegistry().get()
+                .getDataLoaderRegistry()
                 .getDataLoader(Constant.DATA_LOADER_NAME_REFUND_ORDER_ITEMS);
 
         return dataLoader.load(refund.getId());

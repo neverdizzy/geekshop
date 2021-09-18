@@ -23,6 +23,8 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <graphql.version>11.1.0</graphql.version>
+<!--        <graphql.version>7.1.0</graphql.version>-->
     </properties>
 
     <dependencies>
@@ -115,23 +117,28 @@
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>
-            <version>7.1.0</version>
+            <version>${graphql.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.graphql-java-kickstart</groupId>
-            <artifactId>graphql-java-tools</artifactId>
-            <version>6.2.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.graphql-java-kickstart</groupId>-->
+<!--            <artifactId>graphql-java-tools</artifactId>-->
+<!--            <version>6.2.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-extended-scalars</artifactId>
-            <version>1.0.1</version>
+            <version>17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>voyager-spring-boot-starter</artifactId>
+            <version>${graphql.version}</version>
         </dependency>
         <!-- graphql testing facilities -->
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter-test</artifactId>
-            <version>7.1.0</version>
+            <version>${graphql.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -139,7 +146,7 @@
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>playground-spring-boot-starter</artifactId>
-            <version>7.1.0</version>
+            <version>${graphql.version}</version>
             <scope>runtime</scope>
         </dependency>
 
