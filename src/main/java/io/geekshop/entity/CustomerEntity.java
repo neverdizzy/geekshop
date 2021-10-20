@@ -23,6 +23,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class CustomerEntity extends BaseEntity {
     private Date deletedAt;
+    private String title;
     private String firstName;
     private String lastName;
     private String phoneNumber;

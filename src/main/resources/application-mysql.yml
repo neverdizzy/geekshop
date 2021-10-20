@@ -6,7 +6,65 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${MYSQL_URL:jdbc:mysql://10.0.4.57:3306/shop}
-    username: ${MYSQL_USER:geekshop}
-    password: ${MYSQL_PASS:geekshop}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASS:Dusto_2018}
     # SQL is written to be idempotent so this is safe
     initialization-mode: always
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Logging
+logging:
+  level:
+    org.springframework: info
+    io.geekshop: warn
+    graphql: warn
+    # https://github.com/graphql-java-kickstart/graphql-spring-boot/issues/432
+    notprivacysafe.graphql: warn
+
+geekshop:
+  company-name: ${COMPANY_NAME:GEEKSHOP}
+  auth-options:
+    disable-auth: ${DISABLE_AUTH:true}
+    #    disable-auth: ${DISABLE_AUTH:false}
+    token-method: ${TOKEN_MEHTOD:cookie}
+    cookie-options:
+      http-only: ${COOKIE_HTTP_ONLY:true}
+    auth-token-header-key: ${AUTH_TOKEN_HEADER_KEY:geekshop-shared-token}
+    session-duration: ${SESSION_DURATION:1y}
+    session-cache-ttl: ${SESSION_CACHE_TTL:300}
+    require-verification: ${REQUIRE_VERIFICATION:true}
+    verification-token-duration: ${VERIFICATION_TOKEN_DURATION:7d}
+    superadmin-credentials:
+      identifier: ${SUPERADMIN_IDENTIFIER:superadmin}
+      password: ${SUPADMIN_PASSWORD:superadmin123}
+  email-options:
+    transport: ${EMAIL_TRANSPORT:file}
+    output-path: ${EMAIL_FILE_OUTPUT_PATH:test-emails}
+    default-from-email: ${DEFAULT_FROM_EMAIL:geekshop@geekxyz.io}
+    verify-email-address-url: ${VERIFY_EMAIL_ADDRESS_URL:http://localhost:4201/verify}
+    password-reset-url: ${PASSWORD_RESET_URL:http://localhost:4201/reset-password}
+    change-email-address-url: ${CHANGE_EMAIL_ADDRESS_URL:http://localhost:4201/change-email-address}
+  asset-options:
+    upload-max-file-size: ${UPLOAD_MAX_FILE_SIZE:20971520}
+    permitted-file-types:
+      - image/*
+      - video/*
+      - audio/*
+      - application/pdf
+
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#databaseName: shop
+#username: root
+#password: Dusto_2018
+#jdbcConnectionString: jdbc:mysql://10.0.4.57:3306/
+#useMariaDB: false

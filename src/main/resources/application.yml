@@ -2,14 +2,18 @@
 # All rights reserved.
 
 # database init, supports mysql too
-database: h2
+database: mysql
 
 spring:
   datasource:
     schema: classpath*:db/${database}/schema.sql
     data: classpath*:db/${database}/data.sql
-    url: jdbc:h2:mem:testdb;MODE=MYSQL;IGNORECASE=TRUE
-    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:testdb;MODE=MYSQL;IGNORECASE=TRUE
+#    driver-class-name: org.h2.Driver
+    url: ${MYSQL_URL:jdbc:mysql://10.0.4.57:3306/shop}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASS:Dusto_2018}
   output:
     ansi:
       enabled: always
