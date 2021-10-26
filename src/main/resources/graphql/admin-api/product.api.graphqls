@@ -112,5 +112,5 @@ input UpdateProductVariantInput {
     featuredAssetId: ID
     assetIds: [ID!]
     stockOnHand: Int
-    trackInventory: Boolean
+    t: Boolean
 }

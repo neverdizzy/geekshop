@@ -346,11 +346,14 @@ public class ApiClient {
 
         LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("operations", forJson(jsonQuery, new HttpHeaders()));
+        System.out.println("operations: " + forJson(jsonQuery, new HttpHeaders()));
 
         ObjectNode map = objectMapper.createObjectNode();
         map.set("0", objectMapper.createArrayNode().add("variables.file"));
         String jsonMap = objectMapper.writeValueAsString(map);
         body.add("map", forJson(jsonMap, new HttpHeaders()));
+        System.out.println("map: " + forJson(jsonMap, new HttpHeaders()));
+
 
         File imageFile = new File(fileName);
         Resource resource = new FileSystemResource(imageFile);

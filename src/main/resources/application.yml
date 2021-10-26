@@ -41,7 +41,7 @@ logging:
 geekshop:
   company-name: ${COMPANY_NAME:GEEKSHOP}
   auth-options:
-    disable-auth: ${DISABLE_AUTH:true}
+    disable-auth: ${DISABLE_AUTH:false}
 #    disable-auth: ${DISABLE_AUTH:false}
     token-method: ${TOKEN_MEHTOD:cookie}
     cookie-options:
