@@ -87,4 +87,7 @@ public abstract class Constant {
     public static final String DATA_LOADER_NAME_ORDER_LINES = "orderLinesDataLoader";
     public static final String DATA_LOADER_NAME_PAYMENT_REFUNDS = "paymentRefundsDataLoader";
     public static final String DATA_LOADER_NAME_REFUND_ORDER_ITEMS = "refundOrderItemsDataLoader";
+    // ElasticSearch日常操作常量
+    public static final String INDEX = "lead";
+    public static final String TYPE = "_doc";
 }

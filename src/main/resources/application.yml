@@ -79,3 +79,10 @@ geekshop:
 #password: Dusto_2018
 #jdbcConnectionString: jdbc:mysql://10.0.4.57:3306/
 #useMariaDB: false
+
+# ES配置信息
+elasticsearch:
+  host: localhost
+  port: 9200
+  username:
+  password:

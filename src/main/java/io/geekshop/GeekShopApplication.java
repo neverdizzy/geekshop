@@ -5,6 +5,7 @@
 
 package io.geekshop;
 
+import io.geekshop.config.ElasticsearchConfig;
 import io.geekshop.options.ConfigOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableAsync
-@EnableConfigurationProperties(ConfigOptions.class)
+@EnableConfigurationProperties({ConfigOptions.class})
 @RestController
 @Slf4j
 public class GeekShopApplication {
@@ -30,6 +31,6 @@ public class GeekShopApplication {
         log.info("GeekShop Started! Have Fun!");
     }
 
-    @GetMapping
+    @GetMapping("/health")
     public String hello() {return "Hello GeekShop!";}
 }
