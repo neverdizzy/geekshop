@@ -332,8 +332,7 @@ public class SearchIndexService {
     public String createSearchIndexItemEntity(SearchIndexItemEntity document) throws Exception {
 
         IndexRequest indexRequest = new IndexRequest(Constant.ES_PRODUCT_ITEM_INDEX).id(document.getProductVariantId().toString()).source(convertProductItemDocumentToMap(document));
-
-        System.out.println("Map SearchIndexItemEntity: " + convertProductItemDocumentToMap(document));
+        // System.out.println("Map SearchIndexItemEntity: " + convertProductItemDocumentToMap(document));
 
         IndexResponse indexResponse = client.index(indexRequest, options);
         return indexResponse.getResult().name();

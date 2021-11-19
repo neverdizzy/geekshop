@@ -194,26 +194,18 @@
 <!--            <artifactId>elasticsearch</artifactId>-->
 <!--            <version>${elasticsearch.version}</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>${elasticsearch.version}</version>
-            <exclusions>
-<!--                <exclusion>-->
-<!--                    <groupId>org.elasticsearch</groupId>-->
-<!--                    <artifactId>elasticsearch</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.elasticsearch.client</groupId>-->
-<!--                    <artifactId>elasticsearch-rest-client</artifactId>-->
-<!--                </exclusion>-->
-            </exclusions>
-        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.elasticsearch.client</groupId>-->
 <!--            <artifactId>elasticsearch-rest-client</artifactId>-->
 <!--            <version>${elasticsearch.version}</version>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${elasticsearch.version}</version>
+            <exclusions>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -229,6 +221,13 @@
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.78</version>
+        </dependency>
+
     </dependencies>
 
     <build>

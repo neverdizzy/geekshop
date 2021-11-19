@@ -1,5 +1,7 @@
 package io.geekshop.service.helpers.es;
 
+import org.elasticsearch.action.DocWriteRequest;
+import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -19,6 +21,8 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +55,22 @@ public class EsDataOperation {
 
     public void createWithJson() {
         IndexRequest request = new IndexRequest();
+    }
+
+    /**
+     * 添加文档
+     * @param indexName
+     * @param id
+     * @param dataMap
+     * @return
+     * @throws IOException
+     */
+    public boolean saveDoc(String indexName, String id, Map<String, Object> dataMap) throws IOException {
+        IndexRequest indexRequest = new IndexRequest(indexName).id(id)
+                .source(dataMap, XContentType.JSON)
+                .opType(DocWriteRequest.OpType.CREATE);
+        this.client.index(indexRequest, RequestOptions.DEFAULT);
+        return true;
     }
 
     /**
@@ -108,6 +128,20 @@ public class EsDataOperation {
     }
 
     /**
+     * Script更新数字字段
+     * @param id
+     * @param fieldName
+     * @param oprateNum
+     * @return
+     * @throws IOException
+     */
+    public boolean updateFieldNum(String indexName, String id,String fieldName,int oprateNum) throws IOException {
+        UpdateRequest request = new UpdateRequest(indexName,id).script(new Script("ctx._source."+fieldName+" += "+oprateNum));
+        UpdateResponse update = this.client.update(request, options);
+        return update.getShardInfo().getFailed()==0;
+    }
+
+    /**
      * 删除数据
      */
     public boolean delete(String indexName, String id) {
@@ -116,11 +150,33 @@ public class EsDataOperation {
             DeleteResponse response = this.client.delete(deleteRequest, options);
             System.out.println("DeleteResponse: " + response.toString());
             // return response.getResult().name().equals("DELETED") ? Boolean.TRUE : Boolean.FALSE;
-            return Boolean.TRUE;
+            return DocWriteResponse.Result.DELETED.equals(response.getResult());
+            // return Boolean.TRUE;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Boolean.FALSE;
+    }
+
+    /**
+     * 批量删除文档
+     * @param ids id数组
+     * @return
+     * @throws IOException
+     */
+    public boolean batchDelDocById(String indexName, String... ids) throws IOException {
+        BulkRequest bulkRequest = new BulkRequest();
+        if (ids != null && ids.length > 0) {
+            for (String id : ids) {
+                if (id == null || "".equals(id.trim())) {
+                    continue;
+                }
+                bulkRequest.add(new DeleteRequest(indexName, id));
+            }
+            BulkResponse bulk = this.client.bulk(bulkRequest, RequestOptions.DEFAULT);
+            return !bulk.hasFailures();
+        }
+        return false;
     }
 
     /**
@@ -144,6 +200,19 @@ public class EsDataOperation {
         }
 
         return Boolean.FALSE;
+    }
+
+    /**
+     * 判断文档是否存在
+     * @param indexName
+     * @param id
+     * @return
+     */
+    public boolean existDoc(String indexName, String id) throws IOException {
+        GetRequest request = new GetRequest(indexName, id);
+        request.fetchSourceContext(new FetchSourceContext(false));
+        request.storedFields("_none_");
+        return this.client.exists(request, RequestOptions.DEFAULT);
     }
 
     public boolean testIndex() {

@@ -46,18 +46,23 @@ public class EsIndexOperation {
     /**
      * 创建索引
      */
-    public boolean createIndex (String indexName , Map<String, Object> columnMap, String aliasName, int shardsNumber, int replicasNumber){
+    public boolean createIndex (String indexName , Map<String, Object> properties, String aliasName){
         try {
             if(!checkIndex(indexName)){
                 CreateIndexRequest request = new CreateIndexRequest(indexName);
-                if (columnMap != null && columnMap.size()>0) {
-                    Map<String, Object> source = new HashMap<>(1);
-                    source.put("properties", columnMap);
+                // _mapping
+                if (properties != null && properties.size()>0) {
+                    Map<String, Object> source = new HashMap<>();
+                    source.put("properties", properties);
                     request.mapping(source);
                 }
+                // _settings
+                int shardsNumber = 3;
+                int replicasNumber = 1;
                 request.settings(Settings.builder()
                         .put("index.number_of_shards", shardsNumber == 0 ? 3 : shardsNumber)
-                        .put("index.number_of_replicas", replicasNumber == 0 ? 1 : replicasNumber));
+                        .put("index.number_of_replicas", replicasNumber == 0 ? 1 : replicasNumber)
+                        .put("refresh_interval", "10s"));
                 request.alias(new Alias(aliasName));
                 CreateIndexResponse response = this.client.indices().create(request, options);
 
