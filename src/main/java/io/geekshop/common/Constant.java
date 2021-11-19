@@ -90,4 +90,6 @@ public abstract class Constant {
     // ElasticSearch日常操作常量
     public static final String INDEX = "lead";
     public static final String TYPE = "_doc";
+    public static final String ES_PRODUCT_ITEM_INDEX = "product_item";
+
 }

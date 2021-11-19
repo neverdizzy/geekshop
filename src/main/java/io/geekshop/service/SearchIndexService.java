@@ -5,11 +5,20 @@
 
 package io.geekshop.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.geekshop.common.Constant;
 import io.geekshop.entity.*;
 import io.geekshop.mapper.*;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.geekshop.service.helpers.es.EsDataOperation;
+import io.geekshop.service.helpers.es.EsIndexOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -25,6 +34,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @SuppressWarnings("Duplicates")
+
 public class SearchIndexService {
     private final SearchIndexItemEntityMapper searchIndexItemEntityMapper;
     private final ProductVariantFacetValueJoinEntityMapper productVariantFacetValueJoinEntityMapper;
@@ -36,12 +46,29 @@ public class SearchIndexService {
     private final CollectionEntityMapper collectionEntityMapper;
     private final ProductVariantEntityMapper productVariantEntityMapper;
 
+    private final RequestOptions options = RequestOptions.DEFAULT;
+
+    @Autowired
+    private RestHighLevelClient client;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private EsIndexOperation esIndexOperation;
+    @Autowired
+    private EsDataOperation esDataOperation;
+
     public boolean reindex() {
         List<ProductVariantEntity> productVariants = getAllValidProductVariants();
         log.info("Reindexing " + productVariants.size() + " variants");
 
-        this.searchIndexItemEntityMapper.delete(new QueryWrapper<>());
+        // TODO ES重建索引，清空索引数据
+        // this.searchIndexItemEntityMapper.delete(new QueryWrapper<>());
         log.info("Deleted existing index items");
+        if (esIndexOperation.deleteIndex(Constant.ES_PRODUCT_ITEM_INDEX)) {
+            log.info("删除索引成功");
+        } else {
+            log.info("删除索引失败");
+        }
 
         this.saveVariants(productVariants);
         log.info("Completed reindexing");
@@ -54,7 +81,9 @@ public class SearchIndexService {
         queryWrapper.lambda().isNull(ProductVariantEntity::getDeletedAt); // 未删除
         List<ProductVariantEntity> productVariants = this.productVariantEntityMapper.selectList(queryWrapper);
 
-        if (CollectionUtils.isEmpty(productVariants)) return new ArrayList<>();
+        if (CollectionUtils.isEmpty(productVariants)) {
+            return new ArrayList<>();
+        }
 
         List<Long> productIds = productVariants.stream()
                 .map(ProductVariantEntity::getProductId).collect(Collectors.toList());
@@ -172,6 +201,8 @@ public class SearchIndexService {
     }
 
     private void saveVariants(List<ProductVariantEntity> variants) {
+
+        // 写入ES应采用批量提交模式，效率更优
         for(ProductVariantEntity variant : variants) {
             SearchIndexItemEntity item = new SearchIndexItemEntity();
             item.setProductVariantId(variant.getId());
@@ -205,11 +236,28 @@ public class SearchIndexService {
             item.setCollectionIds(collections.stream().map(CollectionEntity::getId).collect(Collectors.toList()));
             item.setCollectionSlugs(collections.stream().map(CollectionEntity::getSlug).collect(Collectors.toList()));
 
-            if (checkExists(item.getProductVariantId())) {
-                this.searchIndexItemEntityMapper.updateById(item);
-            } else {
-                this.searchIndexItemEntityMapper.insert(item);
+            // 支持ElasticSearch产品搜索
+            try {
+                if (esDataOperation.findById(Constant.ES_PRODUCT_ITEM_INDEX ,item.getProductVariantId().toString())) {
+                    esDataOperation.update(Constant.ES_PRODUCT_ITEM_INDEX, item.getProductVariantId().toString(), convertProductItemDocumentToMap(item));
+                } else {
+                    esDataOperation.insert(Constant.ES_PRODUCT_ITEM_INDEX, item.getProductVariantId().toString(), convertProductItemDocumentToMap(item));
+                }
+            } catch (Exception e) {
+                try {
+                    this.createSearchIndexItemEntity(item);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
+            System.out.println("item: " + item.toString());
+
+            // 商品搜搜DB版本
+            // if (checkExists(item.getProductVariantId())) {
+            //     this.searchIndexItemEntityMapper.updateById(item);
+            // } else {
+            //     this.searchIndexItemEntityMapper.insert(item);
+            // }
         }
     }
 
@@ -272,5 +320,35 @@ public class SearchIndexService {
 
     private void removeSearchIndexItems(List<Long> variantIds) {
         this.searchIndexItemEntityMapper.deleteBatchIds(variantIds);
+    }
+
+
+    /**
+     * 创建SearchIndexItemEntity文档
+     * @param document
+     * @return
+     * @throws Exception
+     */
+    public String createSearchIndexItemEntity(SearchIndexItemEntity document) throws Exception {
+
+        IndexRequest indexRequest = new IndexRequest(Constant.ES_PRODUCT_ITEM_INDEX).id(document.getProductVariantId().toString()).source(convertProductItemDocumentToMap(document));
+
+        System.out.println("Map SearchIndexItemEntity: " + convertProductItemDocumentToMap(document));
+
+        IndexResponse indexResponse = client.index(indexRequest, options);
+        return indexResponse.getResult().name();
+    }
+
+    /**
+     * 对象转换成Map(k-v)
+     * @param searchIndexItemEntity
+     * @return
+     */
+    private Map<String, Object> convertProductItemDocumentToMap(SearchIndexItemEntity searchIndexItemEntity) {
+        return objectMapper.convertValue(searchIndexItemEntity, Map.class);
+    }
+
+    private SearchIndexItemEntity convertMapToProductItemDocument(Map<String, Object> map) {
+        return objectMapper.convertValue(map, SearchIndexItemEntity.class);
     }
 }

@@ -9,7 +9,6 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,15 +34,19 @@ public class ElasticsearchConfig {
     private String password;
 
     @Bean(destroyMethod = "close")
-    public RestHighLevelClient restClient() {
+    public RestHighLevelClient client() {
         System.out.println("RestHighLevelClient Init Start!!!");
+        // Elasticsearch集群需要basic auth验证
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        // 访问用户名和密码为Elasticsearch实例时设置的用户名和密码，也是Kibana控制台的登录用户名和密码
         credentialsProvider.setCredentials(AuthScope.ANY,
                 new UsernamePasswordCredentials(userName, password));
 
+        // 通过builder创建rest client，配置http client的HttpClientConfigCallback。
         RestClientBuilder builder = RestClient.builder(new HttpHost(host, port))
                 .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
-        RestHighLevelClient client = new RestHighLevelClient(builder);
-        return client;
+        // RestHighLevelClient实例通过REST low-level client builder进行构造。
+        RestHighLevelClient restHighLevelClient = new RestHighLevelClient(builder);
+        return restHighLevelClient;
     }
 }
